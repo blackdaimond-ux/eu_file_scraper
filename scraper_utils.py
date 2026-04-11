@@ -32,8 +32,8 @@ except ImportError:
 # ==========================================
 # --- ADVANCED SETTINGS (Usually leave alone) ---
 # ==========================================
-TEMP_DOWNLOAD_DIR = "temp_downloads"
-PROCESSED_LOG_CSV_FILE = "processed_documents_log.csv"
+TEMP_DOWNLOAD_DIR = "outputs/temp_downloads"
+PROCESSED_LOG_CSV_FILE = "outputs/processed_documents_log.csv"
 DOWNLOAD_PAUSE_S = 0.3 # Pause between downloads (seconds)
 PAGINATION_PAUSE_S = 3 # Pause between pages (seconds)
 MIN_CHARS_FOR_OCR_FALLBACK = 100 # If a PDF has fewer characters than this, try OCR

@@ -29,7 +29,7 @@ from scraper_utils import (
 # ==========================================
 
 # The JSON file that contains the instructions on how to navigate the website
-CONFIG_FILE = "council_config.json"
+CONFIG_FILE = "configs/council_config.json"
 # The specific search configuration to use from that JSON file
 CONFIG_KEYS = ["2025/semiconductor"]
 
@@ -38,7 +38,7 @@ KEYWORDS_TO_FIND = ["semiconductor", "chip", "integrated circuit", "microprocess
 
 # How many times must ANY keyword appear before we decide to keep the document?
 # E.g., if set to 1, a document with 1 mention of "chip" is saved.
-KEYWORD_THRESHOLD = 1
+KEYWORD_THRESHOLD = 2
 
 # Whether to show the browser window while it works. 
 # Set to False to run it silently in the background.

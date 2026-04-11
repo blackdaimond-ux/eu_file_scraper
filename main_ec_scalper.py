@@ -29,14 +29,14 @@ from scraper_utils import (
 # ==========================================
 
 # The JSON file that contains the instructions on how to navigate the website
-CONFIG_FILE = "ec_config.json"
+CONFIG_FILE = "configs/ec_config.json"
 
 # The words you are looking for. The script will count how many times these appear.
 KEYWORDS_TO_FIND = ["semiconductor", "chip", "integrated circuit", "microprocessor", "cpu"]
 
 # How many times must ANY keyword appear before we decide to keep the document?
 # E.g., if set to 1, a document with 1 mention of "chip" is saved.
-KEYWORD_THRESHOLD = 1
+KEYWORD_THRESHOLD = 2
 
 # Whether to show the browser window while it works. 
 # Set to False to run it silently in the background.

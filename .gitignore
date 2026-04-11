@@ -1,9 +1,5 @@
 # Ignore scraped documents and temp files
-council_official_documents/
-ec_official_documents/
-temp_downloads/
-processed_documents_log.csv
-processed_documents_log.csv.lock
+outputs/
 
 # Python standard ignores
 __pycache__/
