@@ -19,7 +19,7 @@ from typing import Tuple
 from scraper_utils import (
     TEMP_DOWNLOAD_DIR, PROCESSED_LOG_CSV_FILE, DOWNLOAD_PAUSE_S, PAGINATION_PAUSE_S,
     CSV_HEADER, PROCESSED_CSV_HEADER, SiteConfig, OCR_AVAILABLE, BACKGROUND_EXECUTOR, BACKGROUND_STATE,
-    load_config, get_processed_entries, get_next_file_id, setup_csv_file,
+    load_config, get_processed_entries, get_next_file_id, setup_csv_file, FileIdManager,
     append_to_csv, log_processed_entry, analyze_pdf, handle_download, process_and_save_pdf_background,
     update_progress_bar, get_failed_document_references, cleanup_failed_log_entries
 )
@@ -42,9 +42,9 @@ KEYWORD_THRESHOLD = 2
 
 # Whether to show the browser window while it works. 
 # Set to False to run it silently in the background.
-SHOW_BROWSER = True
+SHOW_BROWSER = False
 
-def process_document(page: Page, context_locator: Locator, file_id_counter: int, config: SiteConfig, retry_mode: bool) -> Tuple[str, dict, int]:
+def process_document(page: Page, context_locator: Locator, file_id_manager: FileIdManager, config: SiteConfig, retry_mode: bool) -> Tuple[str, dict]:
     """
     This is the main workflow for a single document found on the search page.
     1. Read its title, date, and link.
@@ -109,20 +109,16 @@ def process_document(page: Page, context_locator: Locator, file_id_counter: int,
             raise ValueError(reason)
 
         # --- Step 3 & 4: Analyze and Save (in background) ---
-        file_id_str = f"{config['file_id_prefix']}_{file_id_counter:03d}"
-        final_filename = f"{file_id_str}.pdf"
-        final_path = os.path.join(config['permanent_storage_dir'], final_filename)
-        
-        # We send the PDF off to a background worker to be analyzed so we can immediately go to the next document
+        # We send the PDF off to a background worker to be analyzed.
+        # The worker will decide whether to save it and assign a file_id.
         BACKGROUND_EXECUTOR.submit(
             process_and_save_pdf_background, 
-            pdf_to_analyze, log_data, file_id_str, final_path, 
+            pdf_to_analyze, log_data, file_id_manager,
             config, KEYWORDS_TO_FIND, KEYWORD_THRESHOLD, retry_mode, doc_ref
         )
         
         latest_action = f"Sent '{os.path.basename(pdf_to_analyze)[:20]}...' to background analyzer"
         BACKGROUND_STATE["latest_action"] = latest_action
-        file_id_counter += 1 # We increment the counter immediately assuming it *might* be saved
         
     except Exception as e:
         # Something broke (e.g. website timeout, corrupted file). Record the error.
@@ -131,7 +127,7 @@ def process_document(page: Page, context_locator: Locator, file_id_counter: int,
         log_data.update({"status": "Failed (technical issue)", "failure_reason": str(e)})
         log_processed_entry(log_data)
     
-    return latest_action, log_data, file_id_counter
+    return latest_action, log_data
 
 def run_scraper(config: SiteConfig, retry_mode: bool = False):
     """
@@ -162,7 +158,8 @@ def run_scraper(config: SiteConfig, retry_mode: bool = False):
         print(f"Retrying {len(failed_refs_to_retry)} documents that failed last time.")
 
     # Find out what number we should name the next file (e.g., start at 1, or continue from 45)
-    file_id_counter = get_next_file_id(permanent_storage_dir, config["file_id_prefix"])
+    initial_file_id = get_next_file_id(permanent_storage_dir, config["file_id_prefix"])
+    file_id_manager = FileIdManager(initial_file_id)
     
     # Track statistics for the progress bar
     docs_processed = 0
@@ -220,7 +217,7 @@ def run_scraper(config: SiteConfig, retry_mode: bool = False):
                         continue
                 
                 # Actually do the work (download and send to background to analyze)
-                latest_action, log_data, file_id_counter = process_document(page, item, file_id_counter, config, retry_mode)
+                latest_action, log_data = process_document(page, item, file_id_manager, config, retry_mode)
                 
                 update_progress_bar(page_num, docs_processed)
                 time.sleep(DOWNLOAD_PAUSE_S) # Brief pause to be polite to the server

@@ -52,6 +52,19 @@ PROCESSED_CSV_HEADER = [
 # We use this to run the background tasks without blocking the main scraper
 BACKGROUND_EXECUTOR = concurrent.futures.ThreadPoolExecutor(max_workers=4)
 
+class FileIdManager:
+    """A thread-safe counter to manage unique file IDs."""
+    def __init__(self, initial_id: int):
+        self._next_id = initial_id
+        self._lock = threading.Lock()
+
+    def get_next_id(self) -> int:
+        """Get the current ID and atomically increment for the next caller."""
+        with self._lock:
+            current_id = self._next_id
+            self._next_id += 1
+            return current_id
+
 class SiteConfig(TypedDict):
     name: str
     base_url: str
@@ -298,7 +311,7 @@ def cleanup_failed_log_entries(document_reference: str):
         except Exception as e:
             pass
 
-def process_and_save_pdf_background(pdf_path: str, log_data: dict, file_id_str: str, final_path: str, config: SiteConfig, keywords_to_find: list, keyword_threshold: int, is_retry_mode: bool, document_reference: str):
+def process_and_save_pdf_background(pdf_path: str, log_data: dict, file_id_manager: "FileIdManager", config: SiteConfig, keywords_to_find: list, keyword_threshold: int, is_retry_mode: bool, document_reference: str):
     """
     This function runs in the background. It reads the PDF (and performs OCR if needed),
     counts the keywords, and then either saves or deletes the file.
@@ -315,6 +328,12 @@ def process_and_save_pdf_background(pdf_path: str, log_data: dict, file_id_str: 
             raise ValueError(reason)
 
         if total_keywords >= keyword_threshold:
+            # Get the next available file ID ONLY when we are sure we're saving it.
+            file_id = file_id_manager.get_next_id()
+            file_id_str = f"{config['file_id_prefix']}_{file_id:03d}"
+            final_filename = f"{file_id_str}.pdf"
+            final_path = os.path.join(config['permanent_storage_dir'], final_filename)
+
             shutil.move(pdf_path, final_path) # Move to final folder
             
             BACKGROUND_STATE["latest_action"] = f"Saved: {os.path.basename(final_path)}"
