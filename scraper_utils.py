@@ -102,10 +102,7 @@ def get_processed_entries() -> Set[Tuple[str, str, str]]:
             with open(PROCESSED_LOG_CSV_FILE, 'r', newline='', encoding='utf-8') as f:
                 reader = csv.DictReader(f)
                 for row in reader:
-                    # If a document failed last time, we want to try it again, so don't skip it
-                    if 'status' in row and "Failed" in row['status']:
-                        continue
-                    # If it succeeded (saved or rejected), remember it so we can skip it
+                    # Remember any document that has been processed, regardless of status
                     if all(k in row for k in ['document_reference', 'keywords_used', 'keyword_threshold']):
                         entry = (row['document_reference'], row['keywords_used'], row['keyword_threshold'])
                         processed_entries.add(entry)
@@ -309,7 +306,8 @@ def cleanup_failed_log_entries(document_reference: str):
             cleaned_df = df[mask]
             cleaned_df.to_csv(PROCESSED_LOG_CSV_FILE, index=False)
         except Exception as e:
-            pass
+            print(f"Warning: Could not clean up failed log entry for '{document_reference}'. Error: {e}")
+
 
 def process_and_save_pdf_background(pdf_path: str, log_data: dict, file_id_manager: "FileIdManager", config: SiteConfig, keywords_to_find: list, keyword_threshold: int, is_retry_mode: bool, document_reference: str):
     """
