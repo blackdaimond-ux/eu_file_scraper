@@ -19,7 +19,7 @@
     {
         "name": "European Council and Council of the European Union",
         "base_url": "https://www.consilium.europa.eu",
-        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=semiconductor&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2025%2F01%2F01&DateTo=2025%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=semiconductor&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2024%2F01%2F01&DateTo=2024%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
         "permanent_storage_dir": "outputs/council_official_documents",
         "file_id_prefix": "council",
         "selectors": {
