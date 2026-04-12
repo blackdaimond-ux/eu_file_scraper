@@ -38,11 +38,11 @@ KEYWORDS_TO_FIND = ["semiconductor", "chip", "integrated circuit", "microprocess
 
 # How many times must ANY keyword appear before we decide to keep the document?
 # E.g., if set to 1, a document with 1 mention of "chip" is saved.
-KEYWORD_THRESHOLD = 2
+KEYWORD_THRESHOLD = 5
 
 # Whether to show the browser window while it works. 
 # Set to False to run it silently in the background.
-SHOW_BROWSER = False
+SHOW_BROWSER = True
 
 def process_document(page: Page, context_locator: Locator, file_id_manager: FileIdManager, config: SiteConfig, retry_mode: bool) -> Tuple[str, dict]:
     """
@@ -166,9 +166,24 @@ def run_scraper(config: SiteConfig, retry_mode: bool = False):
 
     # Start the automated browser
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=not SHOW_BROWSER)
-        context = browser.new_context()
+        browser = p.chromium.launch(
+            headless=not SHOW_BROWSER,
+            args=[
+                '--disable-blink-features=AutomationControlled',
+                '--disable-infobars',
+                '--window-size=1920,1080'
+            ]
+        )
+        context = browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            viewport={"width": 1920, "height": 1080},
+            java_script_enabled=True,
+            bypass_csp=True
+        )
         page = context.new_page()
+
+        # Hide the fact that this is an automated browser
+        page.add_init_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
         
         try:
             print(f"Opening website: {config['name']}...")
@@ -183,14 +198,21 @@ def run_scraper(config: SiteConfig, retry_mode: bool = False):
         # Loop through pages until we run out
         while True:
             print(f"\n--- Checking Page {page_num} ---")
-            page.wait_for_load_state("networkidle") # Wait for page to finish loading
+            
+            # Wait for both network to be idle and for at least one publication item to be visible
+            page.wait_for_load_state("networkidle")
+            try:
+                page.wait_for_selector(config["selectors"]["publication_item"], state="visible", timeout=30000)
+            except PlaywrightTimeoutError:
+                # It might be that there are genuinely no results, or we got blocked.
+                pass
 
             # Find all the documents listed on this page
             publication_items = page.locator(config["selectors"]["publication_item"])
             item_count = publication_items.count()
             
             if item_count == 0:
-                print("\nNo documents found on this page.")
+                print("\nNo documents found on this page. (Or we were blocked from seeing them)")
                 break
 
             # Process each document one by one
@@ -198,6 +220,9 @@ def run_scraper(config: SiteConfig, retry_mode: bool = False):
                 item = publication_items.nth(i)
                 docs_processed += 1
                 
+                # Make sure the element is actually scrolled into view before trying to interact with it
+                item.scroll_into_view_if_needed()
+
                 # Identify the document by its unique reference number
                 doc_ref = ""
                 ref_selector_key = "reference_title" if "reference_title" in config["selectors"] else "reference"
@@ -226,6 +251,7 @@ def run_scraper(config: SiteConfig, retry_mode: bool = False):
             next_button = page.locator(config["selectors"]["next_button"])
             if next_button.count() > 0 and next_button.is_visible() and next_button.is_enabled():
                 page_num += 1
+                next_button.scroll_into_view_if_needed()
                 next_button.click() # Click to go to next page
                 time.sleep(PAGINATION_PAUSE_S)
             else:
