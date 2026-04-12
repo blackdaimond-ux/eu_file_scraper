@@ -30,5 +30,437 @@
             "download_button": "a.pa-download-document2-click",
             "next_button": "a[title='Next page']"
         }
+    },
+    "2023/semiconductor":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=semiconductor&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2023%2F01%2F01&DateTo=2023%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+    "2022/semiconductor":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=semiconductor&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2022%2F01%2F01&DateTo=2022%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+    "2021/semiconductor":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=semiconductor&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2021%2F01%2F01&DateTo=2021%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+    "2020/semiconductor":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=semiconductor&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2020%2F01%2F01&DateTo=2020%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+     "2025/chip":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=chip&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2025%2F01%2F01&DateTo=2025%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+     "2024/chip":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=chip&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2024%2F01%2F01&DateTo=2024%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+     "2023/chip":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=chip&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2023%2F01%2F01&DateTo=2023%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+     "2022/chip":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=chip&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2022%2F01%2F01&DateTo=2022%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+     "2021/chip":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=chip&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2021%2F01%2F01&DateTo=2021%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+     "2020/chip":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=chip&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2020%2F01%2F01&DateTo=2020%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+     "2025/microprocessor":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=microprocessor&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2025%2F01%2F01&DateTo=2025%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+     "2024/microprocessor":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=microprocessor&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2024%2F01%2F01&DateTo=2024%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+    "2023/microprocessor":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=microprocessor&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2023%2F01%2F01&DateTo=2023%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+    "2022/microprocessor":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=microprocessor&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2022%2F01%2F01&DateTo=2022%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+    "2021/microprocessor":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=microprocessor&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2021%2F01%2F01&DateTo=2021%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+    "2025/cpu":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=cpu&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2025%2F01%2F01&DateTo=2025%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+    "2024/cpu":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=cpu&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2024%2F01%2F01&DateTo=2024%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+    "2023/cpu":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=cpu&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2023%2F01%2F01&DateTo=2023%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+    "2022/cpu":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=cpu&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2022%2F01%2F01&DateTo=2022%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+    "2021/cpu":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=cpu&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2021%2F01%2F01&DateTo=2021%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+    "2020/cpu":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=cpu&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2020%2F01%2F01&DateTo=2020%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+    "2025/integrated circuit":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=integrated+circuit&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2025%2F01%2F01&DateTo=2025%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+    "2024/integrated circuit":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=integrated+circuit&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2024%2F01%2F01&DateTo=2024%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+    "2023/integrated circuit":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=integrated+circuit&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2023%2F01%2F01&DateTo=2023%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+    "2022/integrated circuit":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=integrated+circuit&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2022%2F01%2F01&DateTo=2022%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+    "2021/integrated circuit":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=integrated+circuit&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2021%2F01%2F01&DateTo=2021%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+    "2020/integrated circuit":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=integrated+circuit&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2020%2F01%2F01&DateTo=2020%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
     }
 }
