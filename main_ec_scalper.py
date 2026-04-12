@@ -14,6 +14,7 @@ import time
 import shutil
 import sys
 from playwright.sync_api import sync_playwright, Page, TimeoutError as PlaywrightTimeoutError, Locator
+from playwright._impl._errors import Error as PlaywrightError
 from typing import Tuple
 
 from scraper_utils import (
@@ -36,7 +37,7 @@ KEYWORDS_TO_FIND = ["semiconductor", "chip", "integrated circuit", "microprocess
 
 # How many times must ANY keyword appear before we decide to keep the document?
 # E.g., if set to 1, a document with 1 mention of "chip" is saved.
-KEYWORD_THRESHOLD = 2
+KEYWORD_THRESHOLD = 5
 
 # Whether to show the browser window while it works. 
 # Set to False to run it silently in the background.
@@ -204,7 +205,11 @@ def run_scraper(config: SiteConfig, retry_mode: bool = False):
                 docs_processed += 1
 
                 # Make sure the element is actually scrolled into view before trying to interact with it
-                item.scroll_into_view_if_needed()
+                try:
+                    item.scroll_into_view_if_needed(timeout=5000)
+                except (PlaywrightTimeoutError, PlaywrightError) as e:
+                    # Ignore the error if the element is not stable or detached
+                    pass
 
                 # Identify the document by its unique reference number
                 doc_ref = ""
@@ -233,7 +238,11 @@ def run_scraper(config: SiteConfig, retry_mode: bool = False):
             next_button = page.locator(config["selectors"]["next_button"])
             if next_button.count() > 0 and next_button.is_visible() and next_button.is_enabled():
                 page_num += 1
-                next_button.scroll_into_view_if_needed()
+                try:
+                    next_button.scroll_into_view_if_needed(timeout=5000)
+                except (PlaywrightTimeoutError, PlaywrightError) as e:
+                    # Ignore the error if the element is not stable or detached
+                    pass
                 next_button.click() # Click to go to next page
                 time.sleep(PAGINATION_PAUSE_S)
             else:

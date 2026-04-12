@@ -155,7 +155,7 @@ def log_processed_entry(data: dict):
     full_data["processed_timestamp"] = datetime.now().isoformat()
     append_to_csv(PROCESSED_LOG_CSV_FILE, full_data, PROCESSED_CSV_HEADER)
 
-def analyze_pdf(pdf_path: str, keywords_to_find: list) -> Tuple[int, Dict[str, int], Optional[str]]:
+def analyze_pdf(pdf_path: str, keywords_to_find: list) -> Tuple[int, Dict[str, int], Optional[str], str]:
     """
     This is the core analysis function!
     It opens the PDF, reads all the text inside it, and counts how many times
@@ -209,7 +209,7 @@ def analyze_pdf(pdf_path: str, keywords_to_find: list) -> Tuple[int, Dict[str, i
     elif not full_text and not error_reason:
         error_reason = "The document was completely blank."
             
-    return total_count, keyword_counts, error_reason
+    return total_count, keyword_counts, error_reason, full_text
 
 def handle_download(temp_path: str) -> Tuple[Optional[str], Optional[str]]:
     """
@@ -315,7 +315,7 @@ def process_and_save_pdf_background(pdf_path: str, log_data: dict, file_id_manag
     counts the keywords, and then either saves or deletes the file.
     """
     try:
-        total_keywords, keyword_details, reason = analyze_pdf(pdf_path, keywords_to_find)
+        total_keywords, keyword_details, reason, full_text = analyze_pdf(pdf_path, keywords_to_find)
         log_data.update({
             "total_mentions": total_keywords,
             "total_keyword_count": total_keywords,
@@ -329,11 +329,90 @@ def process_and_save_pdf_background(pdf_path: str, log_data: dict, file_id_manag
             # Get the next available file ID ONLY when we are sure we're saving it.
             file_id = file_id_manager.get_next_id()
             file_id_str = f"{config['file_id_prefix']}_{file_id:03d}"
-            final_filename = f"{file_id_str}.pdf"
-            final_path = os.path.join(config['permanent_storage_dir'], final_filename)
-
-            shutil.move(pdf_path, final_path) # Move to final folder
             
+            # --- GOOGLE CLOUD DOCUMENT TRANSLATION ---
+            detected_lang = "en"
+            translated_temp_path = None
+            google_project_id = os.environ.get("GOOGLE_CLOUD_PROJECT")
+            
+            # To use Google Cloud Translation, you typically need to authenticate via
+            # the GOOGLE_APPLICATION_CREDENTIALS environment variable pointing to your JSON key file.
+            
+            if google_project_id and full_text and full_text.strip():
+                try:
+                    from google.cloud import translate
+                    # Create a client.
+                    client = translate.TranslationServiceClient()
+                    
+                    location = "global"
+                    parent = f"projects/{google_project_id}/locations/{location}"
+
+                    # 1. Detect source language using a text snippet
+                    snippet = full_text[:1000]
+                    # We pass the snippet in a list
+                    response = client.detect_language(
+                        content=snippet,
+                        parent=parent,
+                        mime_type="text/plain",
+                    )
+                    
+                    # Get the most likely language
+                    if response.languages:
+                        detected_lang = response.languages[0].language_code.lower()
+                    
+                    # 2. If not English, translate the entire document
+                    # Note: Google Cloud's translate_document requires the document content
+                    # as bytes or via Cloud Storage. We will read the local file bytes.
+                    if detected_lang != "en" and not detected_lang.startswith("en"):
+                        BACKGROUND_STATE["latest_action"] = f"Translating {detected_lang.upper()} document..."
+                        translated_temp_path = pdf_path.replace(".pdf", "_translated_temp.pdf")
+                        
+                        with open(pdf_path, "rb") as document:
+                            document_content = document.read()
+
+                        document_input_config = {
+                            "content": document_content,
+                            "mime_type": "application/pdf",
+                        }
+
+                        translate_response = client.translate_document(
+                            request={
+                                "parent": parent,
+                                "target_language_code": "en-US",
+                                "source_language_code": detected_lang,
+                                "document_input_config": document_input_config,
+                            }
+                        )
+
+                        # Write the translated document bytes to our temp file
+                        with open(translated_temp_path, "wb") as f_out:
+                            f_out.write(translate_response.document_translation.byte_stream_outputs[0])
+                            
+                except ImportError:
+                    print("\nWarning: 'google-cloud-translate' library is not installed. Run 'pip install google-cloud-translate' to enable translation.")
+                except Exception as e:
+                    print(f"\nWarning: Google Cloud Translation failed for {pdf_path}. Error: {e}")
+                    # Ensure we don't crash, clean up temp file if it was partially created
+                    if translated_temp_path and os.path.exists(translated_temp_path):
+                        os.remove(translated_temp_path)
+                    translated_temp_path = None
+            # --- END TRANSLATION ---
+
+            # Save Original File
+            if detected_lang != "en" and not detected_lang.startswith("en") and translated_temp_path:
+                original_filename = f"{file_id_str}_{detected_lang}.pdf"
+            else:
+                original_filename = f"{file_id_str}.pdf"
+                
+            final_path = os.path.join(config['permanent_storage_dir'], original_filename)
+            shutil.move(pdf_path, final_path) # Move original to final folder
+            
+            # Save Translated File if it was created
+            if translated_temp_path and os.path.exists(translated_temp_path):
+                translated_filename = f"{file_id_str}_en.pdf"
+                final_translated_path = os.path.join(config['permanent_storage_dir'], translated_filename)
+                shutil.move(translated_temp_path, final_translated_path)
+
             BACKGROUND_STATE["latest_action"] = f"Saved: {os.path.basename(final_path)}"
             log_data.update({"status": "Saved", "file_id": file_id_str})
             
