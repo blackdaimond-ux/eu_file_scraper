@@ -12,7 +12,7 @@
             "date": "span.pull-right",
             "document_link": "a.pa-download-document2-click",
             "download_button": "a.pa-download-document2-click",
-            "next_button": ".ecl-pagination__item--next a"
+            "next_button": "a[title='Next page']"
         }
     }
 }
