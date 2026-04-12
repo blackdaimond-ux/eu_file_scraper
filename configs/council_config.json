@@ -14,5 +14,21 @@
             "download_button": "a.pa-download-document2-click",
             "next_button": "a[title='Next page']"
         }
+    },
+    "2024/semiconductor":
+    {
+        "name": "European Council and Council of the European Union",
+        "base_url": "https://www.consilium.europa.eu",
+        "search_url": "https://www.consilium.europa.eu/en/documents/public-register/public-register-search/?WordsInSubject=&WordsInText=semiconductor&DocumentNumber=&InterinstitutionalFiles=&DocumentTypes=&DateFrom=2025%2F01%2F01&DateTo=2025%2F12%2F31&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC",
+        "permanent_storage_dir": "outputs/council_official_documents",
+        "file_id_prefix": "council",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
     }
 }
