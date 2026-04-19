@@ -35,7 +35,7 @@ except ImportError:
 TEMP_DOWNLOAD_DIR = "outputs/temp_downloads"
 PROCESSED_LOG_CSV_FILE = "outputs/processed_documents_log.csv"
 DOWNLOAD_PAUSE_S = 0.3 # Pause between downloads (seconds)
-PAGINATION_PAUSE_S = 3 # Pause between pages (seconds)
+PAGINATION_PAUSE_S = 1 # Pause between pages (seconds)
 MIN_CHARS_FOR_OCR_FALLBACK = 100 # If a PDF has fewer characters than this, try OCR
 
 # Columns for our data spreadsheets
@@ -261,18 +261,19 @@ PRINT_LOCK = threading.Lock()
 
 # Global state to keep track of background task progress
 BACKGROUND_STATE = {
+    "checked": 0,
     "analyzed": 0,
     "saved": 0,
     "latest_action": "Starting..."
 }
 
-def update_progress_bar(page: int, processed: int, state: dict = None):
+def update_progress_bar(page: int, state: dict = None):
     """Refreshes the status line at the bottom of your screen."""
     if state is None:
         state = BACKGROUND_STATE
         
     progress_text = (
-        f"\rPage: {page} | Checked: {processed} | Analyzed: {state['analyzed']} | Saved: {state['saved']} | Status: {state['latest_action'][:50]:<50}"
+        f"\rPage: {page} | Checked: {state['checked']} | Analyzed: {state['analyzed']} | Saved: {state['saved']} | Status: {state['latest_action'][:50]:<50}"
     )
     with PRINT_LOCK:
         sys.stdout.write("\r" + " " * 150) # Clear line

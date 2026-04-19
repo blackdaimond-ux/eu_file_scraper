@@ -13,6 +13,7 @@ import os
 import time
 import shutil
 import sys
+import ctypes
 from playwright.sync_api import sync_playwright, Page, TimeoutError as PlaywrightTimeoutError, Locator
 from playwright._impl._errors import Error as PlaywrightError
 from typing import Tuple
@@ -32,7 +33,10 @@ from scraper_utils import (
 # The JSON file that contains the instructions on how to navigate the website
 CONFIG_FILE = "configs/council_config.json"
 # The specific search configuration to use from that JSON file
-CONFIG_KEYS = ["2025/semiconductor"]
+CONFIG_KEYS = ["2025/cpu", "2024/cpu", "2023/cpu", "2022/cpu",
+               "2021/cpu", "2020/cpu",
+               "2025/integrated circuit", "2024/integrated circuit", "2023/integrated circuit", "2022/integrated circuit",
+               "2021/integrated circuit", "2020/integrated circuit"]
 
 # The words you are looking for. The script will count how many times these appear.
 KEYWORDS_TO_FIND = ["semiconductor", "chip", "integrated circuit", "microprocessor", "cpu"]
@@ -44,6 +48,28 @@ KEYWORD_THRESHOLD = 5
 # Whether to show the browser window while it works. 
 # Set to False to run it silently in the background.
 SHOW_BROWSER = True
+
+# Windows API constants for preventing sleep
+ES_CONTINUOUS = 0x80000000
+ES_SYSTEM_REQUIRED = 0x00000001
+
+def prevent_sleep():
+    """Prevents the computer from going to sleep while the script is running (Windows only)."""
+    if os.name == 'nt':
+        try:
+            ctypes.windll.kernel32.SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED)
+            print("Successfully requested system to stay awake.")
+        except Exception as e:
+            print(f"Warning: Could not prevent system sleep. Error: {e}")
+
+def allow_sleep():
+    """Allows the computer to go back to sleep naturally (Windows only)."""
+    if os.name == 'nt':
+        try:
+            ctypes.windll.kernel32.SetThreadExecutionState(ES_CONTINUOUS)
+        except Exception as e:
+            pass
+
 
 def process_document(page: Page, context_locator: Locator, file_id_manager: FileIdManager, config: SiteConfig, retry_mode: bool) -> Tuple[str, dict]:
     """
@@ -161,9 +187,6 @@ def run_scraper(config: SiteConfig, retry_mode: bool = False):
     # Find out what number we should name the next file (e.g., start at 1, or continue from 45)
     initial_file_id = get_next_file_id(permanent_storage_dir, config["file_id_prefix"])
     file_id_manager = FileIdManager(initial_file_id)
-    
-    # Track statistics for the progress bar
-    docs_processed = 0
 
     # Start the automated browser
     with sync_playwright() as p:
@@ -219,7 +242,7 @@ def run_scraper(config: SiteConfig, retry_mode: bool = False):
             # Process each document one by one
             for i in range(item_count):
                 item = publication_items.nth(i)
-                docs_processed += 1
+                BACKGROUND_STATE["checked"] += 1
                 
                 # Make sure the element is actually scrolled into view before trying to interact with it
                 try:
@@ -238,18 +261,18 @@ def run_scraper(config: SiteConfig, retry_mode: bool = False):
                 # Should we skip this one?
                 if retry_mode:
                     if doc_ref not in failed_refs_to_retry:
-                        update_progress_bar(page_num, docs_processed)
+                        update_progress_bar(page_num)
                         continue
                 else:
                     check_tuple = (doc_ref, str(KEYWORDS_TO_FIND), str(KEYWORD_THRESHOLD))
                     if doc_ref and check_tuple in processed_entries:
-                        update_progress_bar(page_num, docs_processed)
+                        update_progress_bar(page_num)
                         continue
                 
                 # Actually do the work (download and send to background to analyze)
                 latest_action, log_data = process_document(page, item, file_id_manager, config, retry_mode)
                 
-                update_progress_bar(page_num, docs_processed)
+                update_progress_bar(page_num)
                 time.sleep(DOWNLOAD_PAUSE_S) # Brief pause to be polite to the server
 
             # Look for the 'Next Page' button
@@ -268,27 +291,44 @@ def run_scraper(config: SiteConfig, retry_mode: bool = False):
                 break
 
         print("\n\nWaiting for background text analysis to finish...")
-        BACKGROUND_EXECUTOR.shutdown(wait=True)
-
-        print("\n\n=== Script Finished ===")
-        print(f"Total documents seen: {docs_processed}")
-        print(f"Total PDFs opened and read: {BACKGROUND_STATE['analyzed']}")
-        print(f"Total documents saved for your thesis: {BACKGROUND_STATE['saved']}")
+        
         context.close()
         browser.close()
 
 if __name__ == "__main__":
     # If the user typed '--retry-failed' in the terminal, run in retry mode
     is_retry_mode = "--retry-failed" in sys.argv
-    for config_key in CONFIG_KEYS:
-        active_config = load_config(CONFIG_FILE, config_key)
+    
+    prevent_sleep()
+    
+    try:
+        # Reset global state for the entire run
+        if "checked" not in BACKGROUND_STATE:
+            BACKGROUND_STATE["checked"] = 0
+        BACKGROUND_STATE["analyzed"] = 0
+        BACKGROUND_STATE["saved"] = 0
+        BACKGROUND_STATE["latest_action"] = "Starting..."
 
-        if active_config:
-            if is_retry_mode:
-                print(f"--- Running RETRY mode for {active_config['name']} ---")
-                run_scraper(active_config, retry_mode=True)
+        for config_key in CONFIG_KEYS:
+            active_config = load_config(CONFIG_FILE, config_key)
+
+            if active_config:
+                if is_retry_mode:
+                    print(f"\n\n--- Running RETRY mode for {active_config['name']} ({config_key}) ---")
+                    run_scraper(active_config, retry_mode=True)
+                else:
+                    print(f"\n\n--- Running NORMAL mode for {active_config['name']} ({config_key}) ---")
+                    run_scraper(active_config, retry_mode=False)
             else:
-                print(f"--- Running NORMAL mode for {active_config['name']} ---")
-                run_scraper(active_config, retry_mode=False)
-        else:
-            continue
+                continue
+                
+        # Move the shutdown here, outside the loop!
+        print("\n\nWaiting for all background text analysis to finish...")
+        BACKGROUND_EXECUTOR.shutdown(wait=True)
+        
+        print("\n\n=== Script Finished ===")
+        print(f"Total documents seen: {BACKGROUND_STATE['checked']}")
+        print(f"Total PDFs opened and read: {BACKGROUND_STATE['analyzed']}")
+        print(f"Total documents saved for your thesis: {BACKGROUND_STATE['saved']}")
+    finally:
+        allow_sleep()
