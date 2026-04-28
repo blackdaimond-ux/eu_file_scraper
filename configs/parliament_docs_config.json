@@ -1,0 +1,83 @@
+{
+    "2020-2025/semiconductor":
+    {
+        "name": "European Parliament",
+        "base_url": "https://www.europarl.europa.eu",
+        "search_url": "https://www.europarl.europa.eu/committees/en/documents/search?committeeMnemoCode=&textualSearchMode=TEXT&textualSearch=semiconductor&documentTypeCode=&reporterPersId=&procedureYear=&procedureNum=&procedureCodeType=&peNumber=&sessionDocumentDocTypePrefix=&sessionDocumentNumber=&sessionDocumentYear=&documentDateFrom=01%2F01%2F2020&documentDateTo=31%2F12%2F2025&meetingDateFrom=&meetingDateTo=&performSearch=true&term=10&page=0&sortOrder=RELEVANCE",
+        "permanent_storage_dir": "outputs/parliament_docs_official_documents",
+        "file_id_prefix": "parliament_docs",
+        "selectors": {
+            "publication_item": ".es_document",
+            "reference_title":  ".es_document-subtitle > .es_document-subtitle-fragment:nth-child(2)",
+            "date": ".es_document-subtitle > .es_document-subtitle-fragment:first-child",
+            "document_link": "a.es_document-subtitle-pdf",
+            "download_button": "a.es_document-subtitle-pdf",
+            "next_button": "button.europarl-expandable-async-loadmore"
+        }
+    },
+    "2020-2025/chip":
+    {
+        "name": "European Parliament",
+        "base_url": "https://www.europarl.europa.eu",
+        "search_url": "https://www.europarl.europa.eu/committees/en/documents/search?committeeMnemoCode=&textualSearchMode=TEXT&textualSearch=chip&documentTypeCode=&reporterPersId=&procedureYear=&procedureNum=&procedureCodeType=&peNumber=&sessionDocumentDocTypePrefix=&sessionDocumentNumber=&sessionDocumentYear=&documentDateFrom=01%2F01%2F2020&documentDateTo=31%2F12%2F2025&meetingDateFrom=&meetingDateTo=&performSearch=true&term=10&page=0&sortOrder=RELEVANCE",
+        "permanent_storage_dir": "outputs/parliament_docs_official_documents",
+        "file_id_prefix": "parliament_docs",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+    "2020-2025/microprocessor":
+    {
+        "name": "European Parliament",
+        "base_url": "https://www.europarl.europa.eu",
+        "search_url": "https://www.europarl.europa.eu/committees/en/documents/search?committeeMnemoCode=&textualSearchMode=TEXT&textualSearch=microprocessor&documentTypeCode=&reporterPersId=&procedureYear=&procedureNum=&procedureCodeType=&peNumber=&sessionDocumentDocTypePrefix=&sessionDocumentNumber=&sessionDocumentYear=&documentDateFrom=01%2F01%2F2020&documentDateTo=31%2F12%2F2025&meetingDateFrom=&meetingDateTo=&performSearch=true&term=10&page=0&sortOrder=RELEVANCE",
+        "permanent_storage_dir": "outputs/parliament_docs_official_documents",
+        "file_id_prefix": "parliament_docs",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+    "2020-2025/cpu":
+    {
+        "name": "European Parliament",
+        "base_url": "https://www.europarl.europa.eu",
+        "search_url": "https://www.europarl.europa.eu/committees/en/documents/search?committeeMnemoCode=&textualSearchMode=TEXT&textualSearch=cpu&documentTypeCode=&reporterPersId=&procedureYear=&procedureNum=&procedureCodeType=&peNumber=&sessionDocumentDocTypePrefix=&sessionDocumentNumber=&sessionDocumentYear=&documentDateFrom=01%2F01%2F2020&documentDateTo=31%2F12%2F2025&meetingDateFrom=&meetingDateTo=&performSearch=true&term=10&page=0&sortOrder=RELEVANCE",
+        "permanent_storage_dir": "outputs/parliament_docs_official_documents",
+        "file_id_prefix": "parliament_docs",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    },
+    "2020-2025/integrated circuit":
+    {
+        "name": "European Parliament",
+        "base_url": "https://www.europarl.europa.eu",
+        "search_url": "https://www.europarl.europa.eu/committees/en/documents/search?committeeMnemoCode=&textualSearchMode=TEXT&textualSearch=integrated+circuit&documentTypeCode=&reporterPersId=&procedureYear=&procedureNum=&procedureCodeType=&peNumber=&sessionDocumentDocTypePrefix=&sessionDocumentNumber=&sessionDocumentYear=&documentDateFrom=01%2F01%2F2020&documentDateTo=31%2F12%2F2025&meetingDateFrom=&meetingDateTo=&performSearch=true&term=10&page=0",
+        "permanent_storage_dir": "outputs/parliament_docs_official_documents",
+        "file_id_prefix": "parliament_docs",
+        "selectors": {
+            "publication_item": ".gsc-public-register__result-item",
+            "reference_title": "strong.pa-download-document-title",
+            "date": "span.pull-right",
+            "document_link": "a.pa-download-document2-click",
+            "download_button": "a.pa-download-document2-click",
+            "next_button": "a[title='Next page']"
+        }
+    }
+}
+   
